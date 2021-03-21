@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    {% load static %}
+    <link rel="stylesheet" href='{% static "/css/register.css" %}'>
+</head>
+<body>
+    <div class="container" id="container">
+        <div class="form-container sign-up-container">
+            <form id="form" action="#">
+                <h1>Create Account</h1>
+                <input type="text" id="name" placeholder="Name" required/>
+                <input type="tel" id="mobile" placeholder="Mobile" required/>
+                <input type="text" name="state" id="state" placeholder="State" required>
+                <input type="text" id="date" placeholder="DOB (MM/DD/YYYY)" onfocus="(this.type='date')" required>
+                <select id="sex" name="sex" required>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Others">Transgender</option>
+                </select>
+                <input type="button" class="scan" value="Scan Your Aadhar" required>
+                <button>Sign Up</button>
+            </form>
+        </div>
+        <div class="form-container sign-in-container">
+            <form action="#">
+                <h1>Login To Vote</h1>
+                <button id="scanAadhar">Scan your Aadhar</button>
+            </form>
+        </div>
+        <div class="overlay-container">
+            <div class="overlay">
+                <div class="overlay-panel overlay-left">
+                    <h1>Welcome Back!</h1>
+                    <p>To keep connected with us please login with your Aadhar</p>
+                    <button class="ghost" id="signIn">Sign In</button>
+                </div>
+                <div class="overlay-panel overlay-right">
+                    <h1>Welcome</h1>
+                    <p>Enter your personal details to register yourself as a voter.</p>
+                    <button class="ghost" id="signUp">Sign Up</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>E-Voting with Aadhar Verification &copy 2021
+        </p>
+    </footer>
+    {% load static %}
+    <script src='{% static "/js/register.js" %}'></script>
+</body>
+</html>
