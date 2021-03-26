@@ -11,19 +11,19 @@
 <body>
     <div class="container" id="container">
         <div class="form-container sign-up-container">
-            <form id="form" action="#">
+            <form id="form" method="POST" >  {% csrf_token %}
                 <h1>Create Account</h1>
-                <input type="text" id="name" placeholder="Name" pattern="[a-zA-Z][a-zA-Z]" title="Name should not contain any digits." required/>
-                <input type="tel" id="mobile" placeholder="Mobile" pattern="[0-9]{10}" title="Mobile number should exactly be 10 digits." required/>
-                <input type="text" name="state" id="state" placeholder="State" pattern="[a-zA-Z][a-zA-Z]{15}" required>
-                <input type="text" id="date" placeholder="DOB (MM/DD/YYYY)" min="1900-01-01" max="2004-04-08" onfocus="(this.type='date')" required>
+                <input type="text" id="name" name="name" placeholder="Name" pattern="[a-zA-Z][a-zA-Z]" title="Name should not contain any digits." required/>
+                <input type="tel" id="mobile" name="mobile" placeholder="Mobile" pattern="[0-9]{10}" title="Mobile number should exactly be 10 digits." required/>
+                <input type="text" name="state" name="state" id="state" placeholder="State" pattern="[a-zA-Z]{2,15}" required>
+                <input type="text" id="date" name="date" placeholder="DOB (MM/DD/YYYY)" min="1900-01-01" max="2004-04-08" onfocus="(this.type='date')" required>
                 <select id="sex" name="sex" required>
                     <option value="Male">Male</option>
                     <option value="Female">Female</option>
                     <option value="Others">Transgender</option>
                 </select>
-                <input type="button" class="scan" value="Scan Your Aadhar" required>
-                <button>Sign Up</button>
+                <input type="button" class="scan" value="Scan Your Aadhar" >
+                <button type="submit">Sign Up</button>
             </form>
         </div>
         <div class="form-container sign-in-container">
