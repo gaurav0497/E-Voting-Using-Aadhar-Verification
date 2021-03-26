@@ -26,5 +26,5 @@ mobile.addEventListener('input',()=>{
 });
 
 state.addEventListener('input',()=>{
-
+	console.log("Hello");
 });

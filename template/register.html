@@ -13,10 +13,10 @@
         <div class="form-container sign-up-container">
             <form id="form" action="#">
                 <h1>Create Account</h1>
-                <input type="text" id="name" placeholder="Name" required/>
-                <input type="tel" id="mobile" placeholder="Mobile" required/>
-                <input type="text" name="state" id="state" placeholder="State" required>
-                <input type="text" id="date" placeholder="DOB (MM/DD/YYYY)" onfocus="(this.type='date')" required>
+                <input type="text" id="name" placeholder="Name" pattern="[a-zA-Z][a-zA-Z]" title="Name should not contain any digits." required/>
+                <input type="tel" id="mobile" placeholder="Mobile" pattern="[0-9]{10}" title="Mobile number should exactly be 10 digits." required/>
+                <input type="text" name="state" id="state" placeholder="State" pattern="[a-zA-Z][a-zA-Z]{15}" required>
+                <input type="text" id="date" placeholder="DOB (MM/DD/YYYY)" min="1900-01-01" max="2004-04-08" onfocus="(this.type='date')" required>
                 <select id="sex" name="sex" required>
                     <option value="Male">Male</option>
                     <option value="Female">Female</option>
