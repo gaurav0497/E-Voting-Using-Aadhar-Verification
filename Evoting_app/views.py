@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from .models import Candidate,Voter
 
 
 def index(request):
@@ -12,5 +13,6 @@ def register(request):
         date = request.POST.get('date')
         sex = request.POST.get('sex')
         print(name, mobile, state, date, sex)
+
 
     return render(request,'register.html')
