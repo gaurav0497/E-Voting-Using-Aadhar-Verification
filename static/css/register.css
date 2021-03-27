@@ -74,6 +74,20 @@ form {
 	text-align: center;
 }
 
+form>img{
+	margin-top: 3%;
+	margin-bottom: 3%;
+	width: 15%;
+}
+
+.login-container>form>button{
+	margin-top: 2%;
+	margin-bottom: 9%;
+}
+.login-container>form>input{
+	width: 50%;
+}
+
 input{
 	background-color: #eee;
 	border: none;
@@ -115,6 +129,14 @@ select{
 	transition: all 0.6s ease-in-out;
 }
 
+.form-container img{
+	width: 250px;
+	margin: 50px auto auto 85px;
+}
+.overlay-panel>img{
+	width: 250px;
+	margin: 50px auto auto 60px;
+}
 .sign-in-container {
 	left: 0;
 	width: 50%;
@@ -216,6 +238,23 @@ select{
 
 .container.right-panel-active .overlay-right {
 	transform: translateX(20%);
+}
+
+.main{
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+.camera{
+	display: flex;
+	flex-direction: column;
+	margin-left: 50px;
+	margin-right: -200px;
+	display: none;
+}
+
+canvas{
+	margin-top: 35px;
 }
 
 footer {
