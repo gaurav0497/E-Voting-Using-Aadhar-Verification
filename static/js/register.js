@@ -13,22 +13,6 @@ signUpButton.addEventListener('click', () => {
 	container.classList.add("right-panel-active");
 });
 
-// signInButton.addEventListener('click', () => {
-// 	container.classList.remove("right-panel-active");
-// });
-
-name.addEventListener('input',()=>{
-	
-});
-
-mobile.addEventListener('input',()=>{
-
-});
-
-state.addEventListener('input',()=>{
-	console.log("Hello");
-});
-
 /* Capture Code*/
 function startcamera()
 {
@@ -41,19 +25,17 @@ function startcamera()
 
 	var handleSuccess = function(stream) {
 	  // Attach the video stream to the video element and autoplay.
-	  player.srcObject = stream;
+	player.srcObject = stream;
 	};
-  
+
 	captureButton.addEventListener('click', function() {
-	  var context = snapshot.getContext('2d');
+	var context = snapshot.getContext('2d');
 	  // Draw the video frame to the canvas.
-	  context.drawImage(player, 0, 0, snapshotCanvas.width,
-		  snapshotCanvas.height);
+	context.drawImage(player, 0, 0, snapshotCanvas.width,
+		snapshotCanvas.height);
 	//   console.log(context.canvas.toDataURL());
 	var fullQuality = snapshotCanvas.toDataURL('image/jpeg', 1.0);
-	
-	document.getElementById('image').href=fullQuality;
-	console.log();
+	console.log(fullQuality);
 	});
 
 	navigator.mediaDevices.getUserMedia({video: true})
