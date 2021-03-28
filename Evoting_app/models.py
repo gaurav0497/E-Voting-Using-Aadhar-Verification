@@ -27,3 +27,11 @@ class Voter(models.Model):
 
     def __str__(self):
         return self.name
+
+class Official(models.Model):
+    id= models.AutoField
+    username = models.CharField(max_length=50)
+    password = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.username

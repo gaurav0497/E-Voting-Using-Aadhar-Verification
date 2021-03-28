@@ -11,11 +11,6 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.RenameField(
-            model_name='candidate',
-            old_name='city',
-            new_name='district',
-        ),
         migrations.AddField(
             model_name='candidate',
             name='aadhar_number',
