@@ -14,5 +14,7 @@ def register(request):
         sex = request.POST.get('sex')
         print(name, mobile, state, date, sex)
 
-
     return render(request,'register.html')
+
+def login(request):
+    return render(request,'officer.html')
