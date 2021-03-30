@@ -5,7 +5,7 @@ const name = document.getElementById('name');
 const mobile = document.getElementById('mobile');
 const state = document.getElementById('state');
 const date = document.getElementById('date');
-const form = document.getElementById('form');
+// const form = document.getElementById('form');
 const status = false;
 
 
@@ -35,10 +35,17 @@ function startcamera()
 		snapshotCanvas.height);
 	//   console.log(context.canvas.toDataURL());
 	var fullQuality = snapshotCanvas.toDataURL('image/jpeg', 1.0);
-	console.log(fullQuality);
+	// console.log(fullQuality);
+	// document.getElementById('image_str').value=fullQuality;
 	});
 
 	navigator.mediaDevices.getUserMedia({video: true})
 		.then(handleSuccess);
-	  
 }
+// sending backend form
+var form = document.getElementById("myForm");
+function handleForm(event) { 
+	event.preventDefault(); 
+	console.log(document.getElementById('image_str').value)
+} 
+form.addEventListener('submit', handleForm);
