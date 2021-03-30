@@ -27,8 +27,19 @@ def register(request):
     return render(request,'register.html')
 
 def login(request):
-    
-    return render(request,'voting.html')
+    video = cv2.VideoCapture(0,cv2.CAP_DSHOW)
+    img = ''
+    flag = True
+    if video.isOpened():
+        i=0
+        while i<8:
+            status, img = video.read()
+            i+=1
+    video.release()
+    pytesseract.pytesseract.tesseract_cmd = r'C:/Users/thaku/Tesseract-OCR/tesseract.exe'
+    cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+    print(pytesseract.image_to_string(img))
+    return render(request,'voting.html',{'flag':flag})
 
 def officerlogin(request):
     usn,pwd = '',''
