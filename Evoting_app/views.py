@@ -36,8 +36,11 @@ def login(request):
             status, img = video.read()
             i+=1
     video.release()
+    img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+    img = cv2.Canny(img, 100, 200)
+
     pytesseract.pytesseract.tesseract_cmd = r'C:/Users/thaku/Tesseract-OCR/tesseract.exe'
-    cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+    # cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
     print(pytesseract.image_to_string(img))
     return render(request,'voting.html',{'flag':flag})
 
