@@ -7,30 +7,44 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Voting page</title>
     <link rel="stylesheet" href='{% static "css/voting.css" %}'>
+    
     {% if flag %}
 </head>
 <body>
-    <div class="heading"><button class="logout">Logout</button></div>
-    
+    <div class="heading" hidden><button class="logout">Logout</button></div>
+    <form method="POST" id="voted" action="/Evoting_app/voting" > {% csrf_token %}
     <div class="container" id="container">
         <div class="voter_name">
             <h1>Voter's Name</h1>
         </div>
         <div class="candidate">
+            {% for i in candidate %}
             <div class="items">
-                <img src='{% static "img/bjp.png" %}' alt="BJP" width="80px">
-                <h2>Candidate's Name</h2>
-                <h3>Party Name</h3>
-                <h3>Candidate's District</h3>
-                <button class="vote">VOTE</button>
+                <img src="/static/img/{{i.party_name|lower}}.png" alt="{{i.party_name}}" width="80px">
+                <h2>{{i.name}}</h2>
+                <h3>{{i.party_name}}</h3>
+                <h3>{{i.district}}</h3>
+                <button id="{{i.name}}" class="vote" onclick="voteat(this.id)">VOTE / मतदान</button>
             </div>
+            {% endfor %}
         </div>
     </div>
+    <div id="secret" name="name" hidden></div>
+    </form>
     <footer>
-        <p>E-Voting with Aadhar Verification &copy 2021</p>
+        <p>E-Voting with Aadhar Verification &copy 2021 / आधार सत्यापन के साथ ई-वोटिंग © 2021</p>
     </footer>
+    <script>
+    function voteat(name){
+	if(confirm("Are you sure you want to vote "+name)){
+        document.querySelector('#secret').innerHTML = name;
+        document.querySelector('#voted').submit();
+	}
+    }
+    </script>
 {% else %}
 <center><h1>You are not registered user</h1></center>
 {% endif %}
 </body>
+
 </html>

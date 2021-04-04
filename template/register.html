@@ -14,19 +14,19 @@
 <div class="main">
     <div class="container" id="container">
         <div class="form-container sign-up-container">
-            <form id="form" method="POST" >  {% csrf_token %}
-                <h1>Create Account</h1>
-                <input type="text" id="name" name="name" placeholder="Name" pattern="[a-zA-Z ]{2,20}" title="Name should not contain any digits." required/>
-                <input type="tel" id="mobile" name="mobile" placeholder="Mobile" pattern="[0-9]{10}" title="Mobile number should exactly be 10 digits." required/>
-                <input type="text" name="state" id="state" placeholder="State" pattern="[a-zA-Z ]{2,15}" required>
-                <input type="text" id="date" name="date" placeholder="DOB (MM/DD/YYYY)" min="1900-01-01" max="2004-04-08" onfocus="(this.type='date')" required>
+            <form id="form" method="POST" action="/Evoting_app/register">  {% csrf_token %}
+                <h1>Voter Registration <br>मतदाता पंजीकरण <br></h1>
+                <input type="text" id="name" name="name" placeholder="Name / नाम" pattern="[a-zA-Z ]{2,20}" title="Name should not contain any digits." required/>
+                <input type="tel" id="mobile" name="mobile" placeholder="Mobile / मोबाइल" pattern="[0-9]{10}" title="Mobile number should exactly be 10 digits." required/>
+                <input type="text" name="district" id="state" placeholder="District / जिला" pattern="[a-zA-Z ]{2,25}" required>
+                <input type="date" id="date" name="date" min="1900-01-01" max="2004-04-08" required>
                 <select id="sex" name="sex" required>
-                    <option value="Male">Male</option>
-                    <option value="Female">Female</option>
-                    <option value="Others">Transgender</option>
+                    <option value="Male">Male / पुरुष</option>
+                    <option value="Female">Female / महिला</option>
+                    <option value="Others">Transgender / ट्रांसजेंडर</option>
                 </select>
-                <input type="button" class="scan" value="Scan Your Aadhar" onclick="startcamera()" >
-                <button type="submit">Sign Up</button>
+                <input type="test" name="aadharnum" placeholder="Enter Your Aadhar / अपने आधार दर्ज करें" pattern="[0-9]{12}">
+                <button type="submit">Sign Up / साइन अप करें</button>
             </form>
         </div>
         <div class="form-container sign-in-container">
@@ -38,27 +38,16 @@
                     <img src='{% static "/img/ashok-stambh.png" %}' alt="Election Commission">
                 </div>
                 <div class="overlay-panel overlay-right">
-                    <h1>Welcome</h1>
-                    <p>Enter your personal details to register yourself as a voter.</p>
-                    <button class="ghost" id="signUp">Sign Up</button>
+                    <h1>Welcome / स्वागत हे</h1>
+                    <p>Enter your personal details to register yourself as a voter.<br><br> मतदाता के रूप में खुद को पंजीकृत करने के लिए अपना व्यक्तिगत विवरण दर्ज करें।</p>
+                    <button class="ghost" id="signUp">Sign Up / साइन अप करें</button>
                 </div>
             </div>
         </div>
     </div>
-    <div class="camera" id="cam">
-        <video id="player" width=250 height=250 autoplay ></video>
-        <button id="capture">capture</button>
-        <canvas id="snapshot" width=250 height=200 ></canvas>
-        <a href="" id="image"></a>
-        <form id="myForm" method="GET">  {% csrf_token %}
-            <span id="image_str" name="image">hi</span>
-            <button type="submit">send</button>
-        </form>
-    </div>
 </div>
     <footer>
-        <p>E-Voting with Aadhar Verification &copy 2021
-        </p>
+        <p>E-Voting with Aadhar Verification &copy 2021 / आधार सत्यापन के साथ ई-वोटिंग © 2021</p>
     </footer>
     {% load static %}
     <script src='{% static "/js/register.js" %}'></script>

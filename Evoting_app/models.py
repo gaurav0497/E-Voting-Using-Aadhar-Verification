@@ -11,6 +11,7 @@ class Candidate(models.Model):
     mobile = models.IntegerField()
     aadhar_number = models.IntegerField()
     register_date = models.DateField(default=datetime.now())
+    vote_count = models.IntegerField(default=0)
 
     def __str__(self):
         return self.name

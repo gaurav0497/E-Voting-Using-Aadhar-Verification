@@ -13,39 +13,7 @@ signUpButton.addEventListener('click', () => {
 	container.classList.add("right-panel-active");
 });
 
-/* Capture Code*/
-function startcamera()
-{
-	var player = document.getElementById('player');
-	var snapshotCanvas = document.getElementById('snapshot');
-	var captureButton = document.getElementById('capture');
+const loginscan = document.getElementById('scanform');
+function handleForm(event) { event.preventDefault(); } 
+loginscan.addEventListener('submit', handleForm);
 
-	var x=document.getElementById('cam');
-	x.style.display="flex";
-
-	var handleSuccess = function(stream) {
-	  // Attach the video stream to the video element and autoplay.
-	player.srcObject = stream;
-	};
-
-	captureButton.addEventListener('click', function() {
-	var context = snapshot.getContext('2d');
-	  // Draw the video frame to the canvas.
-	context.drawImage(player, 0, 0, snapshotCanvas.width,
-		snapshotCanvas.height);
-	//   console.log(context.canvas.toDataURL());
-	var fullQuality = snapshotCanvas.toDataURL('image/jpeg', 1.0);
-	// console.log(fullQuality);
-	// document.getElementById('image_str').value=fullQuality;
-	});
-
-	navigator.mediaDevices.getUserMedia({video: true})
-		.then(handleSuccess);
-}
-// sending backend form
-var form = document.getElementById("myForm");
-function handleForm(event) { 
-	event.preventDefault(); 
-	console.log(document.getElementById('image_str').value)
-} 
-form.addEventListener('submit', handleForm);
