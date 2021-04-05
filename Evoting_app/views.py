@@ -93,9 +93,7 @@ def voterlogin(request):  # voter login logic
             return render(request, 'voting.html', {'flag':False})
     return render(request,'voterlogin.html')
 
-def voting(request,pdid):  # voting logic
-    print(pdid)
+def voting(request):  # voting logic
     if request.method == "POST":
-        
         name = request.POST.get('name')
     return HttpResponse('<h1>Thanks for voting</h1>')
