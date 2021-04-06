@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 # Register your models here.
-from .models import Candidate,Voter,Official
+from .models import Candidate,Voter,Official,Voted
 
 class CandidatetAdmin(admin.ModelAdmin):
     # a list of displayed columns name.
@@ -14,3 +14,4 @@ class VoterAdmin(admin.ModelAdmin):
 admin.site.register(Candidate,CandidatetAdmin)
 admin.site.register(Voter,VoterAdmin)
 admin.site.register(Official)
+admin.site.register(Voted)

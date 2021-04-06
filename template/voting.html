@@ -7,15 +7,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Voting page</title>
     <link rel="stylesheet" href='{% static "css/voting.css" %}'>
-    
     {% if flag %}
 </head>
 <body>
     <div class="heading" hidden><button class="logout">Logout</button></div>
-    
     <div class="container" id="container">
         <div class="voter_name">
-            <h1>Voter's Name</h1>
+            <h1>Hi! {{cname|upper}}</h1>
         </div>
         <form method="POST" id="voted" action="/Evoting_app/voting" > {% csrf_token %}
             <div class="candidate">
@@ -30,18 +28,18 @@
                 {% endfor %}
             </div>
         </form>
-        </div>
+    </div>
     <footer>
         <p>E-Voting with Aadhar Verification &copy 2021 / आधार सत्यापन के साथ ई-वोटिंग © 2021</p>
     </footer>
     <script>
     function voteat(name){
-	    alert("You Voted : "+name)
+        alert("You Voted : "+name)
         document.querySelector('#voted').submit();
     }
     </script>
 {% else %}
-<center><h1>You are not registered user</h1></center>
+<center><h1>You are not registered user.</h1></center>
 {% endif %}
 </body>
 

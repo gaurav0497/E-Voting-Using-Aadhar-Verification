@@ -1,10 +1,11 @@
 from django.shortcuts import render,HttpResponse
-from .models import Candidate,Voter,Official
+from .models import Candidate,Voter,Official,Voted
 import pytesseract
 import cv2
 from time import sleep
 from django.db.models import F
 
+# Scanning image to extract aadhar number from aadhar card
 def aadharscanning():
     key = cv2. waitKey(1)
     webcam = cv2.VideoCapture(0)
@@ -22,10 +23,8 @@ def aadharscanning():
             img = cv2.rectangle(img, (200,400),(600,475), (0,255,0),2)
             cv2.imshow("Capturing", img)
             img = img[400:475,200:600]
-
             img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
             img = cv2.threshold(img, 0, 255, cv2.THRESH_BINARY_INV + cv2.THRESH_OTSU)[1]
-
             word = process_image(img, "eng")
             if word=='':
                 pass
@@ -35,7 +34,6 @@ def aadharscanning():
                     aadhar_num[word] += 1
                 else:
                     aadhar_num[word] = 1
-
         except(KeyboardInterrupt):
             print("Turning off camera.")
             webcam.release()
@@ -43,18 +41,34 @@ def aadharscanning():
             print("Program ended.")
             cv2.destroyAllWindows()
             break
-
     # for key,value in aadhar_num.items():
     #     print(key,'---:---',value)
-
     final_aadhar_num=max(aadhar_num,key=aadhar_num.get)
     print("\nFinal Result : ",final_aadhar_num)
     cv2.destroyAllWindows()
     return final_aadhar_num
 
+# Rendering main page.
 def index(request):
     return render(request,'index.html')
 
+# Officer login after verification.
+def officerlogin(request):
+    usn,pwd = '',''
+    flag = False
+    if request.method == "POST":
+        usn = request.POST.get('usn')
+        pwd = request.POST.get('pwd')
+    usn = Official.objects.filter(username=usn)
+    pwd = Official.objects.filter(password=pwd)
+    if ((len(usn)!=0) and (len(pwd)!=0)):
+        flag = True
+        return render(request,'register.html',{'flag':flag})
+    else:
+        return render(request, 'officer.html')
+    return render(request, 'officer.html')
+
+# Registering new user
 def register(request):
     if request.method == "POST":
         name = request.POST.get('name')
@@ -73,39 +87,29 @@ def register(request):
             return HttpResponse('<script> alert("Aadhar already registered") </script>')
     return render(request,'register.html')
 
+# Voter login after scanning aadhar number
 def voterlogin(request):
     if request.method == "POST":
         try:
             final_aadhar_num = aadharscanning()
-            test_data = Voter.objects.values('district','aadhar_number').get(aadhar_number=final_aadhar_num)
+            test_data = Voter.objects.values('id','district','aadhar_number','name').get(aadhar_number=final_aadhar_num)
             # print(test_data)
-            if test_data:
+            voted_candidate = Voted.objects.filter(name='{}{}'.format(test_data['id'],test_data['name']))
+            if (test_data) and (len(voted_candidate)==0):
                 candidates = Candidate.objects.values('name','party_name','district').filter(district=test_data['district'])
-                # print(candidates)
-                return render(request, 'voting.html', {'flag':True, 'candidate':candidates})
+                Voted(name='{}{}'.format(test_data['id'],test_data['name'])).save()
+                return render(request, 'voting.html', {'flag':True, 'candidate':candidates,'cname':test_data['name']})
+            else:
+                return HttpResponse("<h1>You already voted.</h1>")
         except Exception as e:
+            print(e)
             cv2.destroyAllWindows()
             return render(request, 'voting.html', {'flag':False})
     return render(request,'voterlogin.html')
 
-def officerlogin(request):
-    usn,pwd = '',''
-    flag = False
-    if request.method == "POST":
-        usn = request.POST.get('usn')
-        pwd = request.POST.get('pwd')
-    usn = Official.objects.filter(username=usn)
-    pwd = Official.objects.filter(password=pwd)
-    if ((len(usn)!=0) and (len(pwd)!=0)):
-        flag = True
-        return render(request,'register.html',{'flag':flag})
-    else:
-        return render(request, 'officer.html')
-    return render(request, 'officer.html')
-
+#  Voting page after everything either fails or success.
 def voting(request):
     if request.method == "POST":
         name = request.POST.get('name')
-        print(name)
         Candidate.objects.filter(name=name).update(vote_count=F('vote_count') + 1)
     return render(request,"thankyou.html")
