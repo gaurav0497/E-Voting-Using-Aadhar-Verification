@@ -1,5 +1,5 @@
 from django.db import models
-from django.utils import timezone
+from datetime import datetime
 
 # Create your models here.
 class Candidate(models.Model):
@@ -10,11 +10,11 @@ class Candidate(models.Model):
     gender = models.CharField(max_length=50,default="")
     mobile = models.IntegerField()
     aadhar_number = models.IntegerField()
-    register_date = models.DateField(default=timezone.now)
+    register_date = models.DateField(default=datetime.now())
     vote_count = models.IntegerField(default=0)
 
     def __str__(self):
-        return self.name
+        return self.name+"   "+str(self.vote_count)
 
 class Voter(models.Model):
     id = models.AutoField
@@ -23,7 +23,7 @@ class Voter(models.Model):
     gender = models.CharField(max_length=50,default="")
     mobile = models.IntegerField()
     aadhar_number = models.CharField(max_length=12)
-    register_date = models.DateField(default=timezone.now)
+    register_date = models.DateField(default=datetime.now())
     dob = models.DateField()
 
     def __str__(self):

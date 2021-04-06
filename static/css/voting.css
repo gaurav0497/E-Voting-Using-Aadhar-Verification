@@ -67,7 +67,7 @@ body {
 
 .candidate>div{
 	display: flex;
-	justify-content: space-evenly;
+	justify-content: space-between;
 	align-items: center;
 	background-color: rgb(212, 212, 212);
 	margin: 10px 0;
