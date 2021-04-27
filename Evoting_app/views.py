@@ -8,7 +8,7 @@ from django.db.models import F
 # Scanning image to extract aadhar number from aadhar card
 def aadharscanning():
     key = cv2. waitKey(1)
-    webcam = cv2.VideoCapture(0)
+    webcam = cv2.VideoCapture(1)
     sleep(2)
     def process_image(iamge_name, lang_code):
         return pytesseract.image_to_string(iamge_name, lang=lang_code)
